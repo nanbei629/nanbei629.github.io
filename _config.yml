@@ -66,14 +66,14 @@ friends:
 disqus: false
 disqus_url: '' # https://abc.disqus.com/embed.js
 # 来必力评论
-livere: true
-livere_uid: 'MTAyMC8zNDI2OS8xMDgwNg==' # MTAyMC8zNDI2OS8xMDgwNg==
+livere: false
+livere_uid: '' # MTAyMC8zNDI2OS8xMDgwNg==
 # Gitment评论 OAuth Application
-Gitment: false
-Gitment_owner: ''  # github用户名
-Gitment_repo: ''  # github博客存放的仓库名
-client_id: ''  # 注册 OAuth Application 后获得的 client_id
-client_secret: ''  # 注册 OAuth Application 后获得的 client_secret
+Gitment: true
+Gitment_owner: 'nanbei629'  # github用户名
+Gitment_repo: 'nanbei629.github.io'  # github博客存放的仓库名
+client_id: '8b7bd9e01fed9fc6e523'  # 注册 OAuth Application 后获得的 client_id
+client_secret: '5de637303a577f4279a5894a99616e4d6072c7e2'  # 注册 OAuth Application 后获得的 client_secret
 
 # Share : weibo, qq, wechat, tencent, douban, qzone, linkedin, diandian, facebook, twitter, google
 social-share: true
