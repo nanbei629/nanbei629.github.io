@@ -1,0 +1,424 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="Record" />
+<meta name="keywords" content="Data Science,Machine Learning" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>树(二) ---- 决策树</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+
+<!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(255,210,32) ">
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      inlineMath: [['$','$']]
+      }
+  });
+</script>
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(255,210,32);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;"></a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">树(二) ---- 决策树</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;nanbei629</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(255,210,32);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+      <a href="javascript:;" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(255,210,32)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(255,210,32);"><sapn class="main">没有上一页咯</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">树(二) ---- 决策树</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;nanbei629</span> -->
+  </div>
+  <div class="right-area">
+    
+      <a href="/2020/03/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A0%91-%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(255,210,32)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+      <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(255,210,32);"><sapn class="main">树(一) ---- 知识体系</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+      <a href="javascript:;" class="leftchange" style="border-right: 1px solid rgb(255,210,32);border-bottom: 2px solid rgb(255,210,32);"><span><br>没有上一篇咯</span></a>
+    
+    
+      <a href="/2020/03/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A0%91-%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB.html" class="rightchange" style="border-left: 1px solid rgb(255,210,32);border-bottom: 2px solid rgb(255,210,32);"><span>下一篇<br><br>树(一) ---- 知识体系</span></a>
+    
+  </div>
+</div>
+
+
+<div class="markdown-body fadeInUp animated">
+
+  
+
+  <!-- 文章内容 -->
+  <p>决策树是一种有监督模型，既能分类也能用于回归，既可以是二叉树，也可以是非二叉树。决策树的叶子结点表示结果，非叶子结点表示特征。建立决策树的过程主要是通过算法递归地为每个非叶子结点选择最优特征；建立后经过剪枝操作，将因为数据noise 和outlier生成的分支移除，以此提升树的精确度和泛化能力。决策树因为可读性强，计算快而被广泛应用。</p>
+
+<p>这一篇主要介绍不同的特征选择方法，还有这些方法如何处理连续值与缺失值。</p>
+
+<h3 id="特征选择">特征选择</h3>
+
+<p>方法：</p>
+
+<ul>
+  <li>信息增益（Gain）</li>
+  <li>信息增益比 （Gain ratio）</li>
+  <li>基尼系数 （Gini index）</li>
+</ul>
+
+<p>针对信息增益和信息增益比这两种方法，我们的目标是，让经过特征结点分类后的数据是比较确定的，而不是随机的。在这个过程中引入信息熵作为选择结点特征的基础。信息熵是用来衡量随机变量$X$的不确定性，公式为</p>
+
+<script type="math/tex; mode=display">\begin{gather}H(x) = -\sum_{x}p(x)logp(x)\end{gather}</script>
+
+<p>由公式可以看出信息熵的特点，<strong>发生概率越高的事件即确定性事件，它的信息熵越小</strong>。</p>
+
+<h4 id="信息增益">信息增益</h4>
+
+<p>信息增益用来比较数据集经过某个特征分类后的信息熵变化，如果经过分类后，信息熵变的更小即分类后的数据更加确定，说明选择的特征分化能力较强，计算信息增益的过程：</p>
+
+<ul>
+  <li>
+    <p>计算数据集D的信息熵</p>
+
+    <script type="math/tex; mode=display">\begin{gather}Info(D) =  -\sum_{i}^mp_ilog_2p_i,\quad p_i = \frac{|C_{i,D}|}{D}\end{gather}</script>
+
+    <p>其中$p_i$ 是数据集中第$i$类的概率</p>
+  </li>
+  <li>
+    <p>计算数据集D经特征A分类后的信息熵</p>
+
+    <script type="math/tex; mode=display">\begin{gather}Info_A(D) = \sum_{j=1}^v \frac{|D_j|}{|D|}*Info(D_j)\end{gather}</script>
+
+    <p>其中 $v$ 是特征A中不同的值 的个数${a_1,a_2,…,a_v}$ , 这些值将数据集$D$划分为$v$个数据子集</p>
+  </li>
+  <li>
+    <p>计算特征A的信息增益值</p>
+
+    <script type="math/tex; mode=display">\begin{gather}Gain(A) = Info(D) - Info_A(D)\end{gather}</script>
+
+    <ul>
+      <li>$Info_A(D)$越小，分类后的结果越确定，$Gain(A)$就越大</li>
+    </ul>
+  </li>
+</ul>
+
+<p>信息增益很直观的衡量了特征的分化能力，但是这种方法也存在弊端，<strong>它会偏向于选取值较多的特征</strong>。比如对用户数据，我们将用户$ID$ 看作一个特征(A)，来计算<script type="math/tex">Gain(ID)</script>，</p>
+
+<ul>
+  <li>n个用户ID将数据集划分为n个数据子集，每个数据子集中都只有一个数据，整个数据集会被划分为k类
+    <ul>
+      <li>$n_A = N,\quad N_{a_i} = 1,\quad N_{c} = k $</li>
+    </ul>
+  </li>
+  <li>对每个类别分类结果，只有是或者不是两种结果
+    <ul>
+      <li>$N_{a_i,k} = 0\quad or\quad 1$</li>
+    </ul>
+  </li>
+  <li>所以每个子类别的信息熵都为0
+    <ul>
+      <li>$\frac{N_{a_i,l}}{N_{a_i}}log\frac{N_{a_i,l}}{N_{a_i}} = 0$</li>
+    </ul>
+  </li>
+</ul>
+
+<p>这使得信息增益达到最大值，但显然这个特征不具有分化能力，改进该问题，我们有了信息增益率。</p>
+
+<h4 id="信息增益率">信息增益率</h4>
+
+<ul>
+  <li>
+    <p>计算特征A对数据集D的拆分能力</p>
+
+    <script type="math/tex; mode=display">\begin{gather}SplitInfo_A(D) = -\sum_{j=1}^v \frac{|D_j|}{|D|}*log_2\frac{|D_j|}{|D|}\end{gather}</script>
+
+    <ul>
+      <li>这个公式和求信息熵类似，与$Info_A(D)$相比，修改了后面乘积部分</li>
+      <li>由于$D_j$ 表示数据集在特征$A$上取每个值$a_j$的个数，而不是数据本身的真实分类$C_j$的个数，所以它间接衡量了特征$A$的取值集合大小</li>
+      <li>特征$A$的取值集合较大时，$j$的取值较多，结果更加不确定，所以$SplitInfo_A(D)$ 较大；特征$A$的取值集合较小时$SplitInfo_A(D)$ 较小</li>
+    </ul>
+  </li>
+  <li>
+    <p>计算特征A的信息增益率</p>
+
+    <script type="math/tex; mode=display">\begin{gather}GainRatio(A) = \frac{Gain(A)}{SplitInfo_A(D)}\end{gather}</script>
+  </li>
+</ul>
+
+<h4 id="基尼系数">基尼系数</h4>
+
+<p>基尼系数用来衡量样本被选错的概率，基尼系数越小，表示特征越好，这与前两种方法是相反的。</p>
+
+<ul>
+  <li>
+    <p>计算数据集D的基尼系数</p>
+
+    <script type="math/tex; mode=display">\begin{gather}Gini(D) =\sum_{i=1}^mp_i(1-p_i) =1 - \sum_{i=1}^mp_i^2，\quad p_i = \frac{|C_{i,D}|}{|D|}\end{gather}</script>
+
+    <ul>
+      <li>$p_i(1-p_i)$ 表示第$i$类别的样本被选错的概率</li>
+    </ul>
+  </li>
+  <li>
+    <p>计算数据集D经过特征A分类后的基尼系数</p>
+
+    <script type="math/tex; mode=display">\begin{gather}Gini_A(D) = \frac{|D_1|}{|D|}Gini(D_1) + \frac{|D_2|}{|D|}Gini(D_2)\end{gather}</script>
+
+    <ul>
+      <li>$D_1,D_2$是$D$根据特征的某个值a，划分出来的数据子集</li>
+      <li>$D_1 = {(x,y)\in D \mid x_A \le a},D_2 = D-D_1$</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="连续值与缺失值处理">连续值与缺失值处理</h3>
+
+<h4 id="缺失值">缺失值</h4>
+
+<p>面对的问题：</p>
+
+<ul>
+  <li>如何在属性缺失值的情况下划分属性？</li>
+  <li>给定划分属性，如果样本在该属性上的值缺失，则如何划分样本？</li>
+</ul>
+
+<h4 id="连续值">连续值</h4>
+
+<p>遇到连续属性，我们通过下面的操作将连续特征转化为离散特征</p>
+
+<ul>
+  <li>
+    <p>假设特征$A$在$D$中出现了$v$个不同的取值, ${a_1,a_2,…,a_v}$</p>
+  </li>
+  <li>
+    <p>将${a_1,a_2,…,a_v}$ 升序排列</p>
+  </li>
+  <li>
+    <p>选取$v-1$个划分点，每个划分点依次为$\frac{a_1 + a_{2}}{2},\frac{a_2 + a_{3}}{2},…,\frac{a_{M-1} + a_{M}}{2}$</p>
+  </li>
+</ul>
+
+
+  <!-- 引入share模块 -->
+  
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+
+
+<section class="post-footer-item comment">
+  <div id="container"></div>
+</section>
+
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: '/2020/03/31/树（二）决策树', // 可选。默认为 location.href
+  owner: 'nanbei629',
+  repo: 'nanbei629.github.io',
+  oauth: {
+    client_id: '8b7bd9e01fed9fc6e523',
+    client_secret: '5de637303a577f4279a5894a99616e4d6072c7e2',
+  },
+})
+gitment.render('container')
+</script>
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有Gitment评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>Nanbei629 blog ©
+  
+  
+    2018
+    -
+  
+  2020
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 600,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

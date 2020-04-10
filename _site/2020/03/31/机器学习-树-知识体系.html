@@ -26,7 +26,7 @@
 <link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
 <!-- Android Lolipop Theme Color -->
 <!-- <meta name="theme-color" content="#1464FB"> -->
-<title>[机器学习] 树(一) ---- 知识体系</title>
+<title>树(一) ---- 知识体系</title>
 <!-- 百度统计 -->
 
 <script>
@@ -44,6 +44,15 @@ var _hmt = _hmt || [];
 
 <!-- Android Lolipop Theme Color -->
 <meta name="theme-color" content=" rgb(255,210,32) ">
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      inlineMath: [['$','$']]
+      }
+  });
+</script>
 </head>
 <body>
 
@@ -100,7 +109,7 @@ var _hmt = _hmt || [];
 <!-- 引入博文顶部样式 -->
 <!-- 版本一 垃圾 -->
 <!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
-    <span class="wow fadeInUp" data-wow-delay="0.2s">[机器学习] 树(一) ---- 知识体系</span>
+    <span class="wow fadeInUp" data-wow-delay="0.2s">树(一) ---- 知识体系</span>
     <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
     <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
     <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;nanbei629</span>
@@ -112,12 +121,12 @@ var _hmt = _hmt || [];
   <!-- 页面宽度大于800px -->
   <div class="left-area">
     
-      <a href="javascript:;" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(255,210,32)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
-      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(255,210,32);"><sapn class="main">没有上一页咯</sapn></span></div>
+      <a href="/2020/03/31/%E6%A0%91-%E4%BA%8C-%E5%86%B3%E7%AD%96%E6%A0%91.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(255,210,32)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(255,210,32);"><sapn class="main">树(二) ---- 决策树</sapn></span></div>
     
   </div>
   <div class="post-titlearea">
-    <span class="wow fadeInUp" data-wow-delay="0.2s">[机器学习] 树(一) ---- 知识体系</span>
+    <span class="wow fadeInUp" data-wow-delay="0.2s">树(一) ---- 知识体系</span>
     <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
     <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
     <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;nanbei629</span> -->
@@ -132,7 +141,7 @@ var _hmt = _hmt || [];
   <!-- 页面宽度小于800px -->
   <div class="post-changearea">
     
-      <a href="javascript:;" class="leftchange" style="border-right: 1px solid rgb(255,210,32);border-bottom: 2px solid rgb(255,210,32);"><span><br>没有上一篇咯</span></a>
+      <a href="/2020/03/31/%E6%A0%91-%E4%BA%8C-%E5%86%B3%E7%AD%96%E6%A0%91.html" class="leftchange" style="border-right: 1px solid rgb(255,210,32);border-bottom: 2px solid rgb(255,210,32);"><span>上一篇<br><br>树(二) ---- 决策树</span></a>
     
     
       <a href="javascript:;" class="rightchange" style="border-left: 1px solid rgb(255,210,32);border-bottom: 2px solid rgb(255,210,32);"><span><br>没有下一篇咯</span></a>
@@ -195,29 +204,26 @@ var _hmt = _hmt || [];
 
 
 
-    <section class="post-footer-item comment">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDI2OS8xMDgwNg=="></div>
-    </section>
-
-    <!-- 来必力City版安装代码 -->
-    <script type="text/javascript">
-       (function(d, s) {
-           var j, e = d.getElementsByTagName(s)[0];
-
-           if (typeof LivereTower === 'function') { return; }
-
-           j = d.createElement(s);
-           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-           j.async = true;
-
-           e.parentNode.insertBefore(j, e);
-       })(document, 'script');
-    </script>
-    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-    <!-- City版安装代码已完成 -->
 
 
+<section class="post-footer-item comment">
+  <div id="container"></div>
+</section>
 
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: '/2020/03/31/[机器学习] 树——知识体系', // 可选。默认为 location.href
+  owner: 'nanbei629',
+  repo: 'nanbei629.github.io',
+  oauth: {
+    client_id: '8b7bd9e01fed9fc6e523',
+    client_secret: '5de637303a577f4279a5894a99616e4d6072c7e2',
+  },
+})
+gitment.render('container')
+</script>
 
 
 <!-- 引入goto模块 -->
@@ -227,7 +233,7 @@ var _hmt = _hmt || [];
         Top
     </div>
   </a>
-  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+  <a title="底部有Gitment评论哦" class="gotobottom" href="#htmldown" target="_self">
     <div class="box" style="font-family:'ffad_matroregular';">
         Foot
     </div>
